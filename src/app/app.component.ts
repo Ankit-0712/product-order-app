@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { product } from './models/product';
 import { OrderItem } from './models/orderItem';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TtsService } from './service/tts.service';
+import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -35,9 +36,9 @@ export class AppComponent implements OnInit {
       this.addEmptyRows();
   }
 
-  get rows(): FormArray{
-    return this.form.get('rows') as FormArray;
-  }
+ get rows(): FormArray<FormGroup> {
+  return this.form.get('rows') as FormArray<FormGroup>;
+}
 
   private createRowGroup() : FormGroup{
     return this.fb.group({
@@ -62,43 +63,45 @@ export class AppComponent implements OnInit {
   }
 
   //add row
-  onAdd(i : number){
-    const row = this.rows.at(i);
-    const {productId, productName, quantity} = row.value;
+onAdd(i: number) {
+  const row = this.rows.at(i);
+  const { productId, productName, quantity } = row.value;
 
-    //common validation
-    if(!productId && (quantity === null || quantity === undefined)){
-      alert('please choose a product and a quantity');
-      return;
-    }
+  const qty = Number(quantity); // ensure it's a number
 
-    if(!productId){
-      alert('please choose a product');
-      return;
-    }
-
-    //treat quantity 0 as invalid
-    if(!quantity || quantity === 0){
-      alert('please Choose Quantiy(1-5)');
-      return;
-    }
-
-    //lock row (disable editing) and mark locked
-    row.patchValue({locked : true});
-    row.disable();
-
-    //merge into orerItem 
-    const existing = this.orderItem.find(x => x.productId===productId);
-    if(existing){
-      existing.quantity += quantity;
-
-    }else{
-      this.orderItem.push({productId, productName, quantity});
-    }
-
-    //reveal next row if allowed
-    if(this.rows.length < this.maxRows) this.addEmptyRows();
+  // Validate
+  if (!productId && (qty == null || isNaN(qty))) {
+    alert('Please choose a product and a quantity');
+    return;
   }
+
+  if (!productId) {
+    alert('Please choose a product');
+    return;
+  }
+
+  if (!qty || qty <= 0) {
+    alert('Please choose a quantity (1-5)');
+    return;
+  }
+
+  // Lock row
+  row.patchValue({ locked: true });
+  row.disable();
+
+  // Merge into orderItem
+  const existing = this.orderItem.find(x => x.productId === productId);
+  if (existing) {
+    existing.quantity = Number(existing.quantity) + qty;
+  } else {
+    this.orderItem.push({ productId, productName, quantity: qty });
+  }
+
+  // Add next row if allowed
+  if (this.rows.length < this.maxRows) {
+    this.addEmptyRows();
+  }
+}
 
   //remove any undifined rows and show grid 2
 
