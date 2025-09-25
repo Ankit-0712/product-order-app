@@ -1,0 +1,117 @@
+/* Container */
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Headings */
+h2, h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Table Styling */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+table thead {
+  background-color: #007bff;
+  color: white;
+}
+
+table th,
+table td {
+  text-align: center;
+  padding: 12px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+/* Row when locked */
+tr.locked {
+  background-color: #f9f9f9;
+  opacity: 0.7;
+}
+
+/* Select dropdown */
+select {
+  width: 100%;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Buttons */
+button {
+  margin: 2px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button[type="button"] {
+  background: #007bff;
+  color: white;
+}
+
+button[type="button"]:hover {
+  background: #0056b3;
+}
+
+button[disabled] {
+  background: #ccc !important;
+  cursor: not-allowed;
+}
+
+button:nth-child(2) {
+  background: #ffc107;
+  color: #333;
+}
+
+button:nth-child(2):hover {
+  background: #e0a800;
+}
+
+button:nth-child(3) {
+  background: #dc3545;
+  color: white;
+}
+
+button:nth-child(3):hover {
+  background: #a71d2a;
+}
+
+/* Controls under the table */
+.controls {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.controls button {
+  margin: 5px;
+  padding: 8px 16px;
+  font-size: 15px;
+}
+
+/* Summary Table */
+.summary-grid thead {
+  background-color: #28a745;
+  color: white;
+}
+
+.summary-grid tbody tr:nth-child(odd) {
+  background: #f8f9fa;
+}

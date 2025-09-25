@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
 
  get rows(): FormArray<FormGroup> {
   return this.form.get('rows') as FormArray<FormGroup>;
-}
+}  
 
   private createRowGroup() : FormGroup{
     return this.fb.group({
