@@ -1,27 +1,103 @@
-# ProductOrderApp
+# Product Order App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+A simple Angular standalone application to create product orders with dynamic rows, quantity selection, and a summary. Includes Text-to-Speech (TTS) support for reading orders aloud.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+* Dynamic product rows with add, edit, and remove functionality.
+* Quantity selection (1-5) for each product.
+* Lock rows once added to the order.
+* Display order summary.
+* Text-to-Speech (TTS) for reading the order.
+* Maximum 8 rows allowed.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## Tech Stack
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* Angular (Standalone Components)
+* Reactive Forms
+* TypeScript
+* HTML/CSS
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installation
 
-## Running end-to-end tests
+1. Clone the repository:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+git clone <repository-url>
+cd <repository-folder>
+```
 
-## Further help
+2. Install dependencies:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm install
+```
+
+3. Run the application:
+
+```bash
+ng serve
+```
+
+Open your browser at `http://localhost:4200`.
+
+---
+
+## Usage
+
+1. Select a product from the dropdown.
+2. Choose a quantity.
+3. Click **Add** to add the row to the order.
+4. Optionally, **Edit** or **Remove** a row.
+5. Click **Show Order Summary** to view all added products.
+6. Click **Read Order (TTS)** to hear the order aloud.
+
+---
+
+## Running Tests
+
+The project includes unit tests for core functionality using Jasmine and Karma.
+
+```bash
+ng test
+```
+
+---
+
+## File Structure
+
+```
+src/app/
+│
+├── models/
+│   ├── product.ts       # Product interface
+│   └── orderItem.ts     # OrderItem interface
+│
+├── service/
+│   └── tts.service.ts   # Text-to-Speech service
+│
+├── app.component.ts     # Main component logic
+├── app.component.html   # Template
+├── app.component.css    # Styling
+└── app.component.spec.ts # Unit tests
+```
+
+---
+
+## Notes
+
+* Ensure your browser supports Web Speech API for TTS.
+* Maximum 8 product rows can be added at a time.
+* Rows are locked after adding to prevent accidental edits.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
